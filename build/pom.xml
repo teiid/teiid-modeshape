@@ -10,7 +10,7 @@
     <parent>
         <groupId>org.jboss.teiid.modeshape</groupId>
         <artifactId>teiid-modeshape-parent</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.0.Final</version>
     </parent>
 
     <!-- ================================================================== -->

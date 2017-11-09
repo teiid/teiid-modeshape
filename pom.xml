@@ -10,7 +10,7 @@
     <parent>
         <groupId>org.jboss</groupId>
         <artifactId>jboss-parent</artifactId>
-        <version>20</version>
+        <version>24</version>
     </parent>
 
     <!-- ================================================================== -->
@@ -22,7 +22,7 @@
     <modelVersion>4.0.0</modelVersion>
     <name>Teiid ModeShape</name>
     <packaging>pom</packaging>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0.Final</version>
 
     <!-- ================================================================== -->
     <!-- Properties -->
