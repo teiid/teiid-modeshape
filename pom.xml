@@ -16,9 +16,9 @@
     <!-- ================================================================== -->
     <!-- Self -->
     <!-- ================================================================== -->
-    <artifactId>teiid-modeshape-parent</artifactId>
-    <description>Supporting libraries for sequencing teiid (https://teiid.jboss.org) artifacts into Modeshape repositories (https://modeshape.jboss.org)</description>
     <groupId>org.teiid.modeshape</groupId>
+    <artifactId>teiid-modeshape-parent</artifactId>
+    <description>Supporting libraries for sequencing teiid (https://teiid.org) artifacts into Modeshape repositories (https://modeshape.jboss.org)</description>
     <modelVersion>4.0.0</modelVersion>
     <name>Teiid ModeShape</name>
     <packaging>pom</packaging>
@@ -49,8 +49,90 @@
     </licenses>
 
     <scm>
+        <connection>scm:git:git://github.com/teiid/teiid-modeshape.git</connection>
+        <developerConnection>scm:git:git@github.com:teiid/teiid-modeshape.git</developerConnection>
         <url>https://github.com/teiid/teiid-modeshape</url>
     </scm>
+
+    <developers>
+        <developer>
+            <name>Barry Lafond</name>
+            <id>blafond</id>
+            <email>blafond@redhat.com</email>
+            <organization>Red Hat</organization>
+            <organizationUrl>http://www.redhat.com</organizationUrl>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <timezone>-6</timezone>
+        </developer>
+        <developer>
+            <name>Dan Florian</name>
+            <id>danflo</id>
+            <email>dflorian@redhat.com</email>
+            <organization>Red Hat</organization>
+            <organizationUrl>http://www.redhat.com</organizationUrl>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <timezone>-6</timezone>
+        </developer>
+        <developer>
+            <name>Paul Richardson</name>
+            <id>phantomjinx</id>
+            <email>p.g.richardson@redhat.com</email>
+            <organization>Red Hat</organization>
+            <organizationUrl>http://www.redhat.com</organizationUrl>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <timezone>0</timezone>
+        </developer>
+        <developer>
+            <name>Mark Drilling</name>
+            <id>mdrilling</id>
+            <email>mdrillin@redhat.com</email>
+            <organization>Red Hat</organization>
+            <organizationUrl>http://www.redhat.com</organizationUrl>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <timezone>-6</timezone>
+        </developer>
+        <developer>
+            <name>Ted Jones</name>
+            <id>tejones</id>
+            <email>tejones@redhat.com</email>
+            <organization>Red Hat</organization>
+            <organizationUrl>http://www.redhat.com</organizationUrl>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <timezone>-6</timezone>
+        </developer>
+        <developer>
+            <name>Steve Hawkins</name>
+            <id>steve</id>
+            <email>shawkins@redhat.com</email>
+            <organization>Red Hat</organization>
+            <organizationUrl>http://www.redhat.com</organizationUrl>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <timezone>-6</timezone>
+        </developer>
+        <developer>
+            <name>Ramesh Reddy</name>
+            <id>ramesh</id>
+            <email>rareddy@redhat.com</email>
+            <organization>Red Hat</organization>
+            <organizationUrl>http://www.redhat.com</organizationUrl>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <timezone>-6</timezone>
+        </developer>
+    </developers>
 
     <!-- ================================================================== -->
     <!-- Modules -->
@@ -193,13 +275,25 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>${version.compiler.plugin}</version>
                 <configuration>
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
                     <showDeprecation>false</showDeprecation>
                     <showWarnings>false</showWarnings>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
             <!--
@@ -222,21 +316,58 @@
         </plugins>
     </build>
 
-    <distributionManagement>
-       <repository>
-          <id>jboss-releases-repository</id>
-          <name>JBoss Release Staging Repository</name>
-          <uniqueVersion>false</uniqueVersion>
-          <url>https://${jbossNexus}/nexus/service/local/staging/deploy/maven2/</url>
-          <layout>default</layout>
-       </repository>
+    <profiles>
+        <profile>
+            <id>final-release</id>
+            <modules>
+                <module>build</module>
+            </modules>
+            <distributionManagement>
+                <repository>
+                    <id>oss.sonatype.org</id>
+                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                </repository>
+                <snapshotRepository>
+                    <id>oss.sonatype.org</id>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+                </snapshotRepository>
+            </distributionManagement>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>${version.javadoc.plugin}</version>
+                        <configuration>
+                            <maxmemory>512m</maxmemory>
+                            <failOnError>false</failOnError>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <configuration>
+                            <useAgent>true</useAgent>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
-       <snapshotRepository>
-          <id>jboss-snapshots-repository</id>
-          <name>JBoss Snapshot Repository</name>
-          <uniqueVersion>false</uniqueVersion>
-          <url>https://${jbossNexus}/nexus/content/repositories/snapshots/</url>
-          <layout>default</layout>
-       </snapshotRepository>
-    </distributionManagement>
 </project>
