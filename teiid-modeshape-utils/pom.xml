@@ -8,7 +8,7 @@
     <!-- Parent -->
     <!-- ================================================================== -->
     <parent>
-        <groupId>org.jboss.teiid.modeshape</groupId>
+        <groupId>org.teiid.modeshape</groupId>
         <artifactId>teiid-modeshape-parent</artifactId>
         <version>1.0.0.Final</version>
     </parent>

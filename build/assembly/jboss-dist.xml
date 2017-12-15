@@ -14,7 +14,7 @@
             <useAllReactorProjects>true</useAllReactorProjects>
 
             <includes>
-                <include>org.jboss.teiid.modeshape:teiid-modeshape-sequencer-ddl</include>
+                <include>org.teiid.modeshape:teiid-modeshape-sequencer-ddl</include>
             </includes>
 
             <binaries>
@@ -29,7 +29,7 @@
             <useAllReactorProjects>true</useAllReactorProjects>
 
             <includes>
-                <include>org.jboss.teiid.modeshape:teiid-modeshape-sequencer-vdb</include>
+                <include>org.teiid.modeshape:teiid-modeshape-sequencer-vdb</include>
             </includes>
 
             <binaries>

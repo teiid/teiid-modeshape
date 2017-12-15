@@ -18,7 +18,7 @@
     <!-- ================================================================== -->
     <artifactId>teiid-modeshape-parent</artifactId>
     <description>Supporting libraries for sequencing teiid (https://teiid.jboss.org) artifacts into Modeshape repositories (https://modeshape.jboss.org)</description>
-    <groupId>org.jboss.teiid.modeshape</groupId>
+    <groupId>org.teiid.modeshape</groupId>
     <modelVersion>4.0.0</modelVersion>
     <name>Teiid ModeShape</name>
     <packaging>pom</packaging>
@@ -69,13 +69,13 @@
         <dependencies>
             <!-- Sub-projects -->
             <dependency>
-                <groupId>org.jboss.teiid.modeshape</groupId>
+                <groupId>org.teiid.modeshape</groupId>
                 <artifactId>teiid-modeshape-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>org.jboss.teiid.modeshape</groupId>
+                <groupId>org.teiid.modeshape</groupId>
                 <artifactId>teiid-modeshape-utils</artifactId>
                 <version>${project.version}</version>
                 <type>test-jar</type>
@@ -83,19 +83,19 @@
             </dependency>
 
             <dependency>
-                <groupId>org.jboss.teiid.modeshape</groupId>
+                <groupId>org.teiid.modeshape</groupId>
                 <artifactId>teiid-modeshape-sequencer-ddl</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>org.jboss.teiid.modeshape</groupId>
+                <groupId>org.teiid.modeshape</groupId>
                 <artifactId>teiid-modeshape-sequencer-vdb</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>org.jboss.teiid.modeshape</groupId>
+                <groupId>org.teiid.modeshape</groupId>
                 <artifactId>teiid-modeshape-sequencer-dataservice</artifactId>
                 <version>${project.version}</version>
             </dependency>

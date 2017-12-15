@@ -20,7 +20,7 @@
  ~ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  ~ 02110-1301 USA.
 -->
-<module xmlns="urn:jboss:module:1.2" name="org.jboss.teiid.modeshape.sequencer.vdb">
+<module xmlns="urn:jboss:module:1.2" name="org.teiid.modeshape.sequencer.vdb">
     <resources>
         <resource-root path="teiid-modeshape-sequencer-vdb-${project.version}.jar" />
     </resources>
