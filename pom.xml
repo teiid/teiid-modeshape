@@ -17,7 +17,7 @@
     <!-- Self -->
     <!-- ================================================================== -->
     <artifactId>teiid-modeshape-parent</artifactId>
-    <description>A collection of ModeShape projects related to Teiid artifacts.</description>
+    <description>Supporting libraries for sequencing teiid (https://teiid.jboss.org) artifacts into Modeshape repositories (https://modeshape.jboss.org)</description>
     <groupId>org.jboss.teiid.modeshape</groupId>
     <modelVersion>4.0.0</modelVersion>
     <name>Teiid ModeShape</name>
@@ -39,6 +39,18 @@
         <slf4j.log4j.version>1.7.7</slf4j.log4j.version>
 	<jbossNexus>repository.jboss.org</jbossNexus>
     </properties>
+
+    <licenses>
+        <license>
+           <name>Apache License, Version 2.0</name>
+           <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+           <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>https://github.com/teiid/teiid-modeshape</url>
+    </scm>
 
     <!-- ================================================================== -->
     <!-- Modules -->
