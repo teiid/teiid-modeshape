@@ -28,10 +28,12 @@ import static org.hamcrest.core.IsNull.notNullValue;
 import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 import javax.jcr.Node;
 import org.junit.Test;
 import org.teiid.modeshape.sequencer.AbstractSequencerTest;
@@ -141,6 +143,16 @@ public final class VdbExporterTest extends AbstractSequencerTest {
             assertThat( source.getName(), is( "jdbc" ) );
             assertThat( source.getTranslator(), is( "mysql" ) );
             assertThat( source.getJndiName(), is( "java:/ProductsMySQL" ) );
+
+            //
+            // Look at the product model properties and check that
+            // there is a property for the origin connection of the model source
+            //
+            Map<String, String> productProps = products.getProperties();
+            assertTrue( productProps.size() == 1);
+            String propName = VdbModel.createOriginConnectionPropertyName(source.getName());
+            assertTrue( productProps.containsKey(propName));
+            assertThat( productProps.get(propName), is("ProductsMySQL" ));
         }
 
         { // productView model

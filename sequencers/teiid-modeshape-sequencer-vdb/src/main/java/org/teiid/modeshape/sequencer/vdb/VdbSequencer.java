@@ -461,8 +461,9 @@ public class VdbSequencer extends Sequencer {
 
                 // set model sources
                 List< Source > sources = model.getSources();
+                Node modelSourcesGroupNode = null;
                 if ( !sources.isEmpty() ) {
-                    Node modelSourcesGroupNode = modelNode.addNode( VdbLexicon.Vdb.SOURCES, VdbLexicon.Vdb.SOURCES );
+                    modelSourcesGroupNode = modelNode.addNode( VdbLexicon.Vdb.SOURCES, VdbLexicon.Vdb.SOURCES );
 
                     for ( final VdbModel.Source source : sources ) {
                         Node sourceNode = modelSourcesGroupNode.addNode( source.getName(), VdbLexicon.Source.SOURCE );
@@ -472,7 +473,29 @@ public class VdbSequencer extends Sequencer {
                 }
 
                 for ( Map.Entry< String, String > entry : model.getProperties().entrySet() ) {
-                    setProperty( modelNode, entry.getKey(), entry.getValue() );
+                    String key = entry.getKey();
+                    if (VdbModel.isSourceFromOriginConnectionProperty(key)) {
+                        //
+                        // The origin connection property is preserved on the
+                        // model but applies to the model source so find the source
+                        // and and a property accordingly
+                        //
+                        if (modelSourcesGroupNode == null)
+                            continue;
+
+                        String sourceName = VdbModel.getSourceFromOriginConnectionProperty(key);
+                        if (modelSourcesGroupNode.hasNode(sourceName)) {
+                            Node sourceNode = modelSourcesGroupNode.getNode(sourceName);
+                            //
+                            // After parsing and finding the correct source, it is simply a case of applying
+                            // the preserved value. What the implementing repository does with this value
+                            // is entirely at their discretion.
+                            //
+                            sourceNode.setProperty(VdbLexicon.Source.ORIGIN_CONNECTION, entry.getValue());
+                        }
+                    } else {
+                        setProperty( modelNode, key, entry.getValue() );
+                    }
                 }
             }
         }

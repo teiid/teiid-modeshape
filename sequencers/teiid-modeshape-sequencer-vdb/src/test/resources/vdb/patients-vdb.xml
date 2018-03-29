@@ -33,6 +33,7 @@ SELECT id, firstName, lastName, gender, age, currentSmoker, lastPrimaryCareVisit
         name="PatientSource"
         type="PHYSICAL"
     >
+        <property name="origin-conn-src-PatientSource" value="MySqlPatients"/>
         <source
             name="PatientSource"
             translator-name="mysql5"

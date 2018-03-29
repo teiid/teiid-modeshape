@@ -774,6 +774,12 @@ public final class VdbSequencerTest extends AbstractSequencerTest {
             assertThat(sourceNode.getPrimaryNodeType().getName(), is(VdbLexicon.Source.SOURCE));
             assertThat(sourceNode.getProperty(VdbLexicon.Source.TRANSLATOR).getString(), is("mysql5"));
             assertThat(sourceNode.getProperty(VdbLexicon.Source.JNDI_NAME).getString(), is("java:/MySqlPatients"));
+            /*
+             * origin connection specified in xml so ensure this property has been
+             * populated. It is up to the implementing repository architecture as to
+             * what should be done with this property.
+             */
+            assertThat(sourceNode.getProperty(VdbLexicon.Source.ORIGIN_CONNECTION).getString(), is("MySqlPatients"));
 
             assertThat(declarativeModelNode.getProperty(CoreLexicon.JcrId.MODEL_TYPE).getString(),
                        is(CoreLexicon.ModelType.PHYSICAL));

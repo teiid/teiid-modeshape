@@ -74,6 +74,7 @@
 [vdb:source] > nt:unstructured
  - vdb:sourceTranslator (string)
  - vdb:sourceJndiName (string)
+ - vdb:originConnection (string) // identifier of the connection that originated the source
 
 [vdb:markers] > nt:unstructured
  + vdb:marker (vdb:marker) = vdb:marker copy sns
