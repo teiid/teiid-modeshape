@@ -62,6 +62,11 @@ public class VdbModel implements Comparable< VdbModel > {
      */
     public static final boolean DEFAULT_VISIBLE = true;
 
+    /**
+     * The property designating associations between sources and named connections
+     */
+    private static final String ORIGIN_CONNECTION_PROPERTY = "origin-conn-src";
+
     private String ddlFileEntryPath;
     private String description;
     private String name;
@@ -76,6 +81,31 @@ public class VdbModel implements Comparable< VdbModel > {
     private final Map< String, String > properties = new HashMap< String, String >();
     private String metadata; // model definition written in DDL
     private String metadataType;
+
+    public static boolean isSourceFromOriginConnectionProperty(String propertyName) {
+        return propertyName != null ? propertyName.startsWith(ORIGIN_CONNECTION_PROPERTY) : false;
+    }
+
+    /**
+     * Extract the vdb model source name from the origin connection property
+     *
+     * @param propertyName the complete property name
+     * @return the vdb model source name
+     */
+    public static String getSourceFromOriginConnectionProperty(String propertyName) {
+        String prefix = VdbModel.ORIGIN_CONNECTION_PROPERTY + "-";
+        return propertyName.replace(prefix, "");
+    }
+
+    /**
+     * Generate the origin connection property name from the given vdb model source
+     *
+     * @param sourceName the model source name
+     * @return the full property name
+     */
+    public static String createOriginConnectionPropertyName(String sourceName) {
+        return ORIGIN_CONNECTION_PROPERTY + "-" + sourceName;
+    }
 
     /**
      * @param name the model name (cannot be <code>null</code> or empty)

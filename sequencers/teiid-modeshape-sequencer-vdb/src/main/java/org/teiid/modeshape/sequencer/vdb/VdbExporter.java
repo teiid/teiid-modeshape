@@ -202,6 +202,22 @@ public class VdbExporter extends AbstractExporter {
                                         source.setJndiName( jndiName );
                                     }
 
+                                    /*
+                                     * If the source node has an origin connection property then it denotes
+                                     * the connection that the model source is based on. This has to be preserved
+                                     * in the parent model properties.
+                                     */
+                                    if (sourceNode.hasProperty(VdbLexicon.Source.ORIGIN_CONNECTION)) {
+                                        String connName = sourceNode.getProperty(VdbLexicon.Source.ORIGIN_CONNECTION).getString();
+                                        if (connName != null) {
+                                            /*
+                                             * Add a property to the model that specifies the association
+                                             * between the named source and the named connection
+                                             */
+                                            model.getProperties().put(VdbModel.createOriginConnectionPropertyName(source.getName()), connName);
+                                        }
+                                    }
+
                                     sources.add( source );
                                     LOGGER.debug( "Added source {0} to model {1}", source.getName(), model.getName() );
                                 }

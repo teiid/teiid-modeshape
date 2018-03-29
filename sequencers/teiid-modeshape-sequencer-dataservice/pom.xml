@@ -10,7 +10,7 @@
     <parent>
         <groupId>org.teiid.modeshape</groupId>
         <artifactId>teiid-modeshape-sequencers</artifactId>
-        <version>1.0.0.Final</version>
+        <version>1.0.1.Final</version>
     </parent>
 
     <!-- ================================================================== -->
