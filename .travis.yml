@@ -1,0 +1,20 @@
+language: java
+sudo: false
+
+install: true
+branches:
+  only:
+  - teiidtools541
+before_script:
+- cp settings.xml $HOME/.m2/settings.xml
+script: "mvn install -s settings.xml -V "
+cache:
+  directories:
+  - $HOME/.m2
+notifications:
+  webhooks:
+    urls:
+      - https://webhooks.gitter.im/e/5ada7bbc05b2a99cff40
+    on_success: change
+    on_failure: always
+    on_start: never
