@@ -319,9 +319,6 @@
     <profiles>
         <profile>
             <id>final-release</id>
-            <modules>
-                <module>build</module>
-            </modules>
             <distributionManagement>
                 <repository>
                     <id>oss.sonatype.org</id>
