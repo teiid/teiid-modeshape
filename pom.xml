@@ -34,7 +34,6 @@
         <jboss.vdb.location>dataVirtualization/vdb</jboss.vdb.location>
         <junit.version>4.12</junit.version>
         <log4j.version>1.2.17</log4j.version>
-        <modeshape.version>5.4.1.Final</modeshape.version>
         <slf4j.api.version>1.7.7</slf4j.api.version>
         <slf4j.log4j.version>1.7.7</slf4j.log4j.version>
 	<jbossNexus>repository.jboss.org</jbossNexus>
@@ -138,6 +137,9 @@
     <!-- Modules -->
     <!-- ================================================================== -->
     <modules>
+        <module>modeshape-parent</module>
+        <module>modeshape-jcr-api</module>
+        <module>modeshape-jcr</module>
         <module>teiid-modeshape-core</module>
         <module>teiid-modeshape-utils</module>
         <module>sequencers</module>
@@ -183,49 +185,28 @@
             </dependency>
 
             <!-- ModeShape -->
-            <dependency>
-                <groupId>org.modeshape</groupId>
-                <artifactId>modeshape-common</artifactId>
-                <version>${modeshape.version}</version>
-            </dependency>
 
             <dependency>
-                <groupId>org.modeshape</groupId>
+                <groupId>org.teiid.modeshape</groupId>
                 <artifactId>modeshape-jcr-api</artifactId>
-                <version>${modeshape.version}</version>
+                <version>${project.version}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.teiid.modeshape</groupId>
+                <artifactId>modeshape-jcr</artifactId>
+                <version>${project.version}</version>
             </dependency>
 
             <!-- ModeShape Test -->            
-            <dependency>
-                <groupId>org.modeshape</groupId>
-                <artifactId>modeshape-common</artifactId>
-                <version>${modeshape.version}</version>
-                <type>test-jar</type>
-                <scope>test</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>org.modeshape</groupId>
-                <artifactId>modeshape-jcr</artifactId>
-                <version>${modeshape.version}</version>
-                <scope>test</scope>
-            </dependency>
 
 			<dependency>
-				<groupId>org.modeshape</groupId>
+				<groupId>org.teiid.modeshape</groupId>
 				<artifactId>modeshape-jcr</artifactId>
 				<type>test-jar</type>
-				<version>${modeshape.version}</version>
+				<version>${project.version}</version>
 				<scope>test</scope>
 			</dependency>
-
-			<dependency>
-				<groupId>org.modeshape</groupId>
-				<artifactId>modeshape-schematic</artifactId>
-				<version>${modeshape.version}</version>
-				<type>test-jar</type>
-				<scope>test</scope>
-			</dependency>        
 
             <!-- Testing -->
             <dependency>
