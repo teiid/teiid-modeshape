@@ -1,0 +1,900 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <groupId>org.teiid.modeshape</groupId>
+        <artifactId>teiid-modeshape-parent</artifactId>
+        <version>1.0.2-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>modeshape-parent</artifactId>
+    <name>ModeShape Parent</name>
+
+    <url>http://www.modeshape.org</url>
+    <packaging>pom</packaging>
+    <description>ModeShape is a JCR repository implementation with support for federation and sequencing.</description>
+    <inceptionYear>2008</inceptionYear>
+    
+    <organization>
+        <name>JBoss, a division of Red Hat</name>
+        <url>http://www.jboss.org</url>
+    </organization>
+
+    <issueManagement>
+        <system>jira</system>
+        <url>http://issues.jboss.org/browse/MODE</url>
+    </issueManagement>
+
+    <developers>
+        <developer>
+            <name>Randall Hauch</name>
+            <id>randall</id>
+            <email>rhauch@redhat.com</email>
+            <organization>JBoss, a division of Red Hat</organization>
+            <roles>
+                <role>Project Lead</role>
+                <role>Developer</role>
+            </roles>
+            <timezone>-6</timezone>
+        </developer>
+        <developer>
+            <name>Horia Chiorean</name>
+            <id>hchiorea@redhat.com</id>
+            <email>hchiorea@redhat.com</email>
+            <organization>JBoss, a division of Red Hat</organization>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <timezone>+2</timezone>
+        </developer>
+        <developer>
+            <name>Dan Florian</name>
+            <id>dan</id>
+            <email>dflorian@redhat.com</email>
+            <organization>JBoss, a division of Red Hat</organization>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <timezone>-5</timezone>
+        </developer>
+        <developer>
+            <name>Oleg Kulikov</name>
+            <id>okulikov</id>
+            <email>okulikov@redhat.com</email>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <timezone>+4</timezone>
+        </developer>
+    </developers>
+    
+    <properties>
+
+        <!-- Used to define the JCR Descriptor value -->
+        <jcr.repository.vendor>${project.organization.name}</jcr.repository.vendor>
+        <jcr.repository.vendor.url>http://www.modeshape.org</jcr.repository.vendor.url>
+        <jcr.repository.name>ModeShape</jcr.repository.name>
+        
+        <!--
+              These are properties used in the database profiles. Must initialize
+              them to be empty so that Maven applies them via filtering to the
+              resources. If a project needs files filtered, however, make sure to
+              include a 'testResources' fragment in the 'build' section of the
+              child project POM to say which files need to be filtered.
+          -->
+        <database.maximumConnectionsInPool>2</database.maximumConnectionsInPool>
+        <database.minimumConnectionsInPool>1</database.minimumConnectionsInPool>
+        <database.numberOfConnectionsToAcquireAsNeeded>1</database.numberOfConnectionsToAcquireAsNeeded>
+        <database.maximumSizeOfStatementCache>100</database.maximumSizeOfStatementCache>
+        <database.maximumConnectionIdleTimeInSeconds>10</database.maximumConnectionIdleTimeInSeconds>
+        <database.retryLimit>0</database.retryLimit>
+
+        <!--By default, we use whatever the underlying machine supports. However, certain sub-modules may change this -->
+        <preferIpv4>false</preferIpv4>
+        <preferIpv6>true</preferIpv6>
+        <debug.argline/>
+
+        <!-- OpenDocument API -->
+        <version.org.odftoolkit.odfdom-java>0.8.7</version.org.odftoolkit.odfdom-java>
+        <version.org.odftoolkit.simple-odf>0.6.6</version.org.odftoolkit.simple-odf>
+
+        <version.junit>4.12</version.junit>
+        <version.org.hamcrest>1.3</version.org.hamcrest>
+        <version.org.mockito>1.10.19</version.org.mockito>
+        <version.org.easymock>3.4</version.org.easymock>
+        <version.org.slf4j>1.7.7</version.org.slf4j>
+        <version.log4j>1.2.17</version.log4j>
+        <version.javax.jcr>2.0</version.javax.jcr>
+        <version.org.mapdb>1.0.9</version.org.mapdb>
+        <version.org.apache.jackrabbit>2.6.0</version.org.apache.jackrabbit>
+        <version.org.jboss.jbossts.jta>5.3.3.Final</version.org.jboss.jbossts.jta>
+        <version.com.atomikos>3.8.0</version.com.atomikos>
+        <version.org.picketbox>4.9.6.Final</version.org.picketbox>
+        <version.com.zaxxer.HikariCP>2.6.1</version.com.zaxxer.HikariCP>
+        
+        <version.org.jboss.spec.javax.transaction.jboss-transaction-api_1.2_spec>1.0.1.Final</version.org.jboss.spec.javax.transaction.jboss-transaction-api_1.2_spec>
+        <version.com.github.ben-manes.caffeine>2.3.3</version.com.github.ben-manes.caffeine>
+        <version.org.jgroups>3.6.10.Final</version.org.jgroups>
+        <jgroups.module.slot>main</jgroups.module.slot>
+        
+        <version.org.jboss.logging>3.3.0.Final</version.org.jboss.logging>
+        <version.org.jboss.spec.javax.servlet.jboss-servlet-api_3.1_spec>1.0.0.Final</version.org.jboss.spec.javax.servlet.jboss-servlet-api_3.1_spec>
+        <version.org.jboss.spec.javax.security.jacc>1.0.0.Final</version.org.jboss.spec.javax.security.jacc>
+        <version.org.jboss.resteasy>3.0.19.Final</version.org.jboss.resteasy>
+        <version.commons-naming>20031116.223527</version.commons-naming>
+        <version.org.codehaus.jettison>1.3.3</version.org.codehaus.jettison>
+        <version.org.apache.httpcomponents>4.4</version.org.apache.httpcomponents>
+        <version.com.googlecode.sardine>146</version.com.googlecode.sardine>
+        <version.org.javassist>3.18.1-GA</version.org.javassist>
+        <version.org.jaudiotagger>2.0.3</version.org.jaudiotagger>
+        <version.org.apache.poi>3.15</version.org.apache.poi>  <!-- Try to match what's in Tika -->
+        <version.com.beust.jcommander>1.5</version.com.beust.jcommander>
+        <version.wsdl4j>1.6.3</version.wsdl4j>
+        <version.de.undercouch.bson4jackson>1.1.2</version.de.undercouch.bson4jackson>
+        <version.org.mongodb.mongo-java-driver>2.14.0</version.org.mongodb.mongo-java-driver>
+        <version.de.flapdoodle.embed.mongo>1.28</version.de.flapdoodle.embed.mongo>
+        <version.com.googlecode.json-simple>1.1</version.com.googlecode.json-simple>
+        <version.com.drewnoakes.metadata-extractor>2.6.2</version.com.drewnoakes.metadata-extractor>
+        <version.org.apache.lucene>6.4.1</version.org.apache.lucene>
+        <version.org.jboss.spec.javax.resource.jboss-connector-api_1.7_spec>1.0.0.Final</version.org.jboss.spec.javax.resource.jboss-connector-api_1.7_spec>
+        <version.org.jboss.ironjacamar>1.0.13.Final</version.org.jboss.ironjacamar>
+        <version.org.apache.pdfbox>2.0.3</version.org.apache.pdfbox>
+        
+        <version.com.h2>1.4.191</version.com.h2>
+        <version.postgresql.9>9.2-1002.jdbc4</version.postgresql.9>
+        <version.mysql>5.1.39</version.mysql>
+        <version.com.oracle>11.2.0.1.0</version.com.oracle>
+        <version.com.amazonaws>1.11.454</version.com.amazonaws>
+        <version.com.microsoft.sqlserver.mssql-jdbc>6.1.0.jre8</version.com.microsoft.sqlserver.mssql-jdbc>
+
+        <version.docker.postgresql>9.5.4</version.docker.postgresql>
+        <version.docker.mysql>5.7</version.docker.mysql>
+        <version.docker.oracle>16.04</version.docker.oracle>
+        <version.docker.sqlserver>latest</version.docker.sqlserver> <!-- currently there are no tags for this image -->
+              
+        <!--Properties which must be used when installing locally a server ZIP distribution -->
+        <version.org.wildfly>10.1.0.Final</version.org.wildfly>
+        <version.org.wildfly.core>2.2.0.Final</version.org.wildfly.core>
+
+        <version.enforcer.asm>7.0</version.enforcer.asm>
+
+        <!-- The id of the maven distribution which is building the current wf kit -->
+        <wf.dist.id>jboss-wf-dist</wf.dist.id>
+        
+        <!--The name of binary distribution -->
+        <binary.dist.name>binary-dist</binary.dist.name>
+
+        <!--
+          Maven plugin versions
+          -->
+        <!-- Make sure the version of the bundle plugin is at least this, otherwise it will fork like crazy...-->
+        <version.bundle.plugin>3.0.0</version.bundle.plugin>
+        <version.gwt.maven.plugin>2.5.1</version.gwt.maven.plugin>
+        <version.org.wildfly.plugings.wildfly-maven-plugin>1.1.0.Final</version.org.wildfly.plugings.wildfly-maven-plugin>
+        <version.fabric8.docker.plugin>0.19.0</version.fabric8.docker.plugin>
+        <version.org.elasticsearch>2.4.5</version.org.elasticsearch>
+        <version.jna>4.1.0</version.jna>
+        <!--The name of the modeshape-client artifact used by tools-->
+        <client.artifactId>modeshape-client</client.artifactId>
+
+        <!--Skip long running tests by default-->
+        <skipLongRunningTests>true</skipLongRunningTests>
+    </properties>
+
+    <profiles>
+        <!--
+              ###################################################################
+              Enable remotely debugging on the command line
+              ###################################################################
+
+              To use, specify "-Ddebug=true" on the Maven command line
+              (typically used when running a single test). Then, start
+              remote debugger (on port 1044) and connect.
+          -->
+        <profile>
+            <id>debug</id>
+            <activation>
+                <property>
+                    <name>debug</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <properties>
+                <!-- Useful for remotely debugging the unit tests run by Surefire ... -->
+                <debug.argline>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=1044</debug.argline>
+            </properties>
+        </profile>
+
+        <!--
+            ###################################################################
+            Database profiles to specify which DBMS is used for tests.
+            ###################################################################
+        -->
+        <profile>
+            <id>default_dbms</id>
+            <activation>
+                <property>
+                    <name>!database</name>
+                </property>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>com.h2database</groupId>
+                    <artifactId>h2</artifactId>
+                </dependency>
+            </dependencies>
+            <properties>
+                <database>h2</database>
+                <database.driver>org.h2.Driver</database.driver>
+                <database.url>jdbc:h2:file:./target/db</database.url>
+                <database.username>sa</database.username>
+                <database.password/>
+                <docker.filter/>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>mysql5</id>
+            <activation>
+                <property>
+                    <name>database</name>
+                    <value>mysql5</value>
+                </property>
+            </activation>
+            <properties>
+                <database>mysql5</database>
+                <database.name>mysql</database.name>
+                <database.username>mysql</database.username>
+                <database.password>mysql</database.password>
+                <database.driver>com.mysql.jdbc.Driver</database.driver>
+                <database.port>3306</database.port>
+                <database.url>jdbc:mysql://${docker.host.address}:${database.port}/${database.name}?autoReconnect=true&amp;useSSL=false</database.url>
+                <docker.filter>mysql/mysql-server:${version.docker.mysql}</docker.filter>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>mysql</groupId>
+                    <artifactId>mysql-connector-java</artifactId>
+                    <version>${version.mysql}</version>
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <profile>
+            <id>postgresql9</id>
+            <activation>
+                <property>
+                    <name>database</name>
+                    <value>postgresql9</value>
+                </property>
+            </activation>
+            <properties>
+                <database>postgresq9</database>
+                <database.name>postgres</database.name>
+                <database.username>postgres</database.username>
+                <database.password>postgres</database.password>
+                <database.driver>org.postgresql.Driver</database.driver>
+                <database.port>5432</database.port>
+                <database.url>jdbc:postgresql://${docker.host.address}:${database.port}/${database.name}</database.url>
+                <docker.filter>postgres:${version.docker.postgresql}</docker.filter>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <!--Must be JDBC 4 (Java 6) compliant-->
+                    <groupId>postgresql</groupId>
+                    <artifactId>postgresql</artifactId>
+                    <version>${version.postgresql.9}</version>
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <profile>
+            <id>oracle11g</id>
+            <activation>
+                <property>
+                    <name>database</name>
+                    <value>oracle11g</value>
+                </property>
+            </activation>
+            <properties>
+                <database>oracle11g</database>
+                <database.username>system</database.username>
+                <database.password>oracle</database.password>
+                <database.driver>oracle.jdbc.OracleDriver</database.driver>
+                <database.port1>49161</database.port1>
+                <database.port2>49160</database.port2>
+                <database.url>jdbc:oracle:thin:@${docker.host.address}:${database.port1}:xe</database.url>
+                <docker.filter>wnameless/oracle-xe-11g:${version.docker.oracle}</docker.filter>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>com.oracle</groupId>
+                    <artifactId>ojdbc6</artifactId>
+                    <version>${version.com.oracle}</version>
+                </dependency>
+            </dependencies>
+        </profile>
+        
+        <profile>
+            <id>sqlserver</id>
+            <activation>
+                <property>
+                    <name>database</name>
+                    <value>sqlserver</value>
+                </property>
+            </activation>
+            <properties>
+                <database>sqlserver</database>
+                <database.username>sa</database.username>
+                <database.password>Password!</database.password>
+                <database.driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</database.driver>
+                <database.port>1433</database.port>
+                <database.url>jdbc:sqlserver://${docker.host.address}:${database.port}</database.url>
+                <docker.filter>microsoft/mssql-server-linux:${version.docker.sqlserver}</docker.filter>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>com.microsoft.sqlserver</groupId>
+                    <artifactId>mssql-jdbc</artifactId>
+                    <version>${version.com.microsoft.sqlserver.mssql-jdbc}</version>
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <!--These profiles must have the same ID as the ones from the root pom-->
+        <profile>
+            <id>assembly</id>
+            <properties>
+                <skipLongRunningTests>false</skipLongRunningTests>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>performance</id>
+            <properties>
+                <skipLongRunningTests>false</skipLongRunningTests>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <!--
+              This section defines the default plugin settings inherited by child
+              projects.
+          -->
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-report-plugin</artifactId>
+                    <version>${version.surefire.plugin}</version>
+                    <configuration>
+                        <showSuccess>true</showSuccess>
+                        <outputDirectory>${project.build.directory}/surefire-reports</outputDirectory>
+                        <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>io.fabric8</groupId>
+                    <artifactId>docker-maven-plugin</artifactId>
+                    <version>${version.fabric8.docker.plugin}</version>
+                    <configuration>
+                        <watchInterval>500</watchInterval>
+                        <logDate>default</logDate>
+                        <verbose>true</verbose>
+                        <autoPull>always</autoPull>
+                        <images>
+                            <image>
+                                <name>postgres:${version.docker.postgresql}</name>
+                                <run>
+                                    <namingStrategy>none</namingStrategy>
+                                    <env>
+                                        <POSTGRES_DB>${database.name}</POSTGRES_DB>
+                                        <POSTGRES_USER>${database.username}</POSTGRES_USER>
+                                        <POSTGRES_PASSWORD>${database.password}</POSTGRES_PASSWORD>
+                                    </env>
+                                    <ports>
+                                        <port>${database.port}:5432</port>
+                                    </ports>
+                                    <log>
+                                        <prefix>postgress</prefix>
+                                        <enabled>true</enabled>
+                                        <color>yellow</color>
+                                    </log>
+                                    <wait>
+                                        <log>PostgreSQL init process complete; ready for start up.</log>
+                                        <time>120000</time>
+                                    </wait>
+                                </run>
+                            </image>
+                            <image>
+                                <name>mysql/mysql-server:${version.docker.mysql}</name>
+                                <run>
+                                    <namingStrategy>none</namingStrategy>
+                                    <env>
+                                        <MYSQL_ROOT_PASSWORD>modeshape</MYSQL_ROOT_PASSWORD>
+                                        <MYSQL_DATABASE>${database.name}</MYSQL_DATABASE>
+                                        <MYSQL_USER>${database.username}</MYSQL_USER>
+                                        <MYSQL_PASSWORD>${database.password}</MYSQL_PASSWORD>
+                                    </env>
+                                    <ports>
+                                        <port>${database.port}:3306</port>
+                                    </ports>
+                                    <log>
+                                        <prefix>mysql</prefix>
+                                        <enabled>true</enabled>
+                                        <color>yellow</color>
+                                    </log>
+                                    <wait>
+                                        <log>MySQL init process done. Ready for start up.</log>
+                                        <time>120000</time>
+                                    </wait>
+                                </run>
+                            </image>
+                            <image>
+                                <name>wnameless/oracle-xe-11g:${version.docker.oracle}</name>
+                                <run>
+                                    <namingStrategy>none</namingStrategy>
+                                    <env>
+                                        <ORACLE_ALLOW_REMOTE>true</ORACLE_ALLOW_REMOTE>
+                                    </env>
+                                    <ports>
+                                        <port>${database.port2}:22</port>
+                                        <port>${database.port1}:1521</port>
+                                    </ports>
+                                    <log>
+                                        <prefix>oracle</prefix>
+                                        <enabled>true</enabled>
+                                        <color>yellow</color>
+                                    </log>
+                                    <wait>
+                                        <log>/usr/sbin/startup.sh: ignoring /docker-entrypoint-initdb.d/*</log>
+                                        <time>300000</time> 
+                                    </wait>
+                                </run>
+                            </image>   
+                            <image>
+                                <name>microsoft/mssql-server-linux:${version.docker.sqlserver}</name>
+                                <run>
+                                    <namingStrategy>none</namingStrategy>
+                                    <env>
+                                        <ACCEPT_EULA>Y</ACCEPT_EULA>
+                                        <SA_PASSWORD>${database.password}</SA_PASSWORD>
+                                    </env>
+                                    <ports>
+                                        <port>${database.port}:1433</port>
+                                    </ports>
+                                    <log>
+                                        <prefix>sqlserver</prefix>
+                                        <enabled>true</enabled>
+                                        <color>yellow</color>
+                                    </log>
+                                    <wait>
+                                        <log>SQL Server is now ready for client connections</log>
+                                        <time>120000</time>
+                                    </wait>
+                                </run>
+                            </image>
+                        </images>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <configuration>
+                        <skipTests>${skipTests}</skipTests>
+                        <encoding>UTF-8</encoding>
+                        <enableAssertions>true</enableAssertions>
+                        <argLine>-Xmx1524M ${debug.argline} -Xss1024k</argLine>
+                        <systemPropertyVariables>
+                            <db.driver>${database.driver}</db.driver>
+                            <db.url>${database.url}</db.url>
+                            <db.username>${database.username}</db.username>
+                            <db.password>${database.password}</db.password>
+                        </systemPropertyVariables>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <!-- Specify the compiler options and settings -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <showDeprecation>false</showDeprecation>
+                    <showWarnings>false</showWarnings>
+                </configuration>
+            </plugin>
+            <!-- Produce source jars during package and test-source jars during the 'verify' phase -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                    <id>attach-sources</id>
+                    <goals>
+                        <goal>jar-no-fork</goal>
+                    </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${version.surefire.plugin}</version>
+                <!-- Manually specify the JUnit provider; see MODE-1140 -->
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.surefire</groupId>
+                        <!--artifactId>surefire-junit47</artifactId-->
+                        <artifactId>surefire-junit4</artifactId>
+                        <!--artifactId>surefire-junit3</artifactId-->
+                        <version>${version.surefire.plugin}</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <systemProperties combine.children="append">
+                        <property>
+                            <name>java.io.tmpdir</name>
+                            <value>${basedir}/target</value>
+                        </property>
+                        <property>
+                            <name>java.net.preferIPv4Stack</name>
+                            <value>${preferIpv4}</value>
+                        </property>
+                        <property>
+                            <name>java.net.preferIPv6Addresses</name>
+                            <value>${preferIpv6}</value>
+                        </property>
+                        <property>
+                            <name>skipLongRunningTests</name>
+                            <value>${skipLongRunningTests}</value>
+                        </property>
+                    </systemProperties>
+                    <argLine>-Xmx1524M ${debug.argline} -Xss1024k -Djava.awt.headless=true</argLine>
+                    <runOrder>alphabetical</runOrder>
+                    <useFile>false</useFile>
+                    <trimStackTrace>false</trimStackTrace>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-eclipse-plugin</artifactId>
+            </plugin>
+
+            <!--
+                   Build a test-jar for each project, so that src/test/* resources and
+                   classes can be used in other projects. Also customize how the jar
+                   files are assembled.
+               -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>test-jar</id>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <dependencies>
+                    <dependency>
+                        <groupId>de.is24.maven.enforcer.rules</groupId>
+                        <artifactId>illegal-transitive-dependency-check</artifactId>
+                        <version>1.7.1</version>
+                    </dependency>
+                    <dependency>
+                        <artifactId>asm</artifactId>
+                        <groupId>org.ow2.asm</groupId>
+                        <version>${version.enforcer.asm}</version>
+                    </dependency>
+                    <dependency>
+                        <artifactId>asm-tree</artifactId>
+                        <groupId>org.ow2.asm</groupId>
+                        <version>${version.enforcer.asm}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.ow2.asm</groupId>
+                        <artifactId>asm-analysis</artifactId>
+                        <version>${version.enforcer.asm}</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <id>enforce-direct-dependencies</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <illegalTransitiveDependencyCheck
+                                        implementation="de.is24.maven.enforcer.rules.IllegalTransitiveDependencyCheck">
+                                    <regexIgnoredClasses>
+                                        <regexIgnoredClass>com\.sun\.net\.httpserver\..+</regexIgnoredClass>
+                                        <regexIgnoredClass>javax\..+</regexIgnoredClass>
+                                        <regexIgnoredClass>org\.w3c\.dom\..+</regexIgnoredClass>
+                                        <regexIgnoredClass>org\.xml\.sax\..+</regexIgnoredClass>
+                                    </regexIgnoredClasses>
+                                    <useClassesFromLastBuild>true</useClassesFromLastBuild>
+                                </illegalTransitiveDependencyCheck>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!--
+         This section defines the default dependency settings inherited by
+         child projects. Note that this section does not add dependencies, but
+         rather provide default settings.
+     -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- ModeShape subprojects -->
+            <dependency>
+                <groupId>org.teiid.modeshape</groupId>
+                <artifactId>modeshape-jcr</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.teiid.modeshape</groupId>
+                <artifactId>modeshape-jcr-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!--
+                ModeShape test modules
+            -->
+            <dependency>
+                <groupId>org.teiid.modeshape</groupId>
+                <artifactId>modeshape-jcr</artifactId>
+                <version>${project.version}</version>
+                <type>test-jar</type>
+                <scope>test</scope>
+            </dependency>
+            <!--
+                Servlet, JAAC, and JCA APIs
+            -->
+            <dependency>
+                <groupId>org.jboss.spec.javax.servlet</groupId>
+                <artifactId>jboss-servlet-api_3.1_spec</artifactId>
+                <version>${version.org.jboss.spec.javax.servlet.jboss-servlet-api_3.1_spec}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.spec.javax.security.jacc</groupId>
+                <artifactId>jboss-jacc-api_1.5_spec</artifactId>
+                <version>${version.org.jboss.spec.javax.security.jacc}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.ben-manes.caffeine</groupId>
+                <artifactId>caffeine</artifactId>
+                <version>${version.com.github.ben-manes.caffeine}</version>
+            </dependency>
+          
+            <dependency>
+                <groupId>org.jboss.spec.javax.transaction</groupId>
+                <artifactId>jboss-transaction-api_1.2_spec</artifactId>
+                <version>${version.org.jboss.spec.javax.transaction.jboss-transaction-api_1.2_spec}</version>
+            </dependency>
+            
+            <!-- 
+                Used by ModeShape's persistence providers...            
+            -->
+            <!-- H2 is used for testing in some cases regardless of the DB profile-->
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${version.com.h2}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zaxxer</groupId>
+                <artifactId>HikariCP</artifactId>
+                <version>${version.com.zaxxer.HikariCP}</version>
+            </dependency>
+            
+            <!-- Heap and file-based maps -->
+            <dependency>
+                <groupId>org.mapdb</groupId>
+                <artifactId>mapdb</artifactId>
+                <version>${version.org.mapdb}</version>
+            </dependency>
+            <!-- Testing (note the scope) -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${version.junit}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-library</artifactId>
+                <version>${version.org.hamcrest}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${version.org.mockito}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.easymock</groupId>
+                <artifactId>easymock</artifactId>
+                <version>${version.org.easymock}</version>
+                <scope>test</scope>
+            </dependency>
+            <!-- Logging (all of the libraries should be optional, as the logging implementation falls back to JUL if nothing is found -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${version.org.slf4j}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>jcl-over-slf4j</artifactId>
+                <version>${version.org.slf4j}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>${version.org.slf4j}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>${version.log4j}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- Java Content Repository API -->
+            <dependency>
+                <groupId>javax.jcr</groupId>
+                <artifactId>jcr</artifactId>
+                <version>${version.javax.jcr}</version>
+                <scope>compile</scope>
+            </dependency>
+            <!--
+                   Apache JCR API unit tests (for any JCR implementation), which is a
+                   subset of the official TCK
+               -->
+            <!-- <dependency>
+                <groupId>org.apache.jackrabbit</groupId>
+                <artifactId>jackrabbit-jcr-tests</artifactId>
+                <version>${version.org.apache.jackrabbit}</version>
+                <scope>test</scope>
+            </dependency>-->
+            <!--
+               PicketBox (JAAS implementation used in test cases)
+               -->
+            <dependency>
+                <groupId>org.picketbox</groupId>
+                <artifactId>picketbox-bare</artifactId>
+                <version>${version.org.picketbox}</version>
+                <scope>test</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>apache-xalan</groupId>
+                        <artifactId>xalan</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>apache-xalan</groupId>
+                        <artifactId>serializer</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>apache-xerces</groupId>
+                        <artifactId>xml-apis</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>apache-xerces</groupId>
+                        <artifactId>xercesImpl</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.hibernate</groupId>
+                        <artifactId>hibernate</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!-- Lucene Index Provider -->
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-core</artifactId>
+                <version>${version.org.apache.lucene}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-analyzers-common</artifactId>
+                <version>${version.org.apache.lucene}</version>
+            </dependency> 
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-queryparser</artifactId>
+                <version>${version.org.apache.lucene}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-backward-codecs</artifactId>
+                <version>${version.org.apache.lucene}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${version.org.apache.httpcomponents}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpcore</artifactId>
+                <version>${version.org.apache.httpcomponents}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpmime</artifactId>
+                <version>${version.org.apache.httpcomponents}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.javassist</groupId>
+                <artifactId>javassist</artifactId>
+                <version>${version.org.javassist}</version>
+            </dependency>
+            <!--WSDL sequencer-->
+            <dependency>
+                <groupId>wsdl4j</groupId>
+                <artifactId>wsdl4j</artifactId>
+                <version>${version.wsdl4j}</version>
+            </dependency>
+            <!--
+                Schematic dependencies
+            -->
+            <dependency>
+                <groupId>org.jboss.logging</groupId>
+                <artifactId>jboss-logging</artifactId>
+                <version>${version.org.jboss.logging}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>de.undercouch</groupId>
+                <artifactId>bson4jackson</artifactId>
+                <version>${version.de.undercouch.bson4jackson}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.googlecode.json-simple</groupId>
+                <artifactId>json-simple</artifactId>
+                <version>${version.com.googlecode.json-simple}</version>
+                <scope>test</scope>
+            </dependency>
+            <!--Specific to ModeShape tests -->
+            <dependency>
+                <groupId>org.jboss.narayana.jta</groupId>
+                <artifactId>narayana-jta</artifactId>
+                <version>${version.org.jboss.jbossts.jta}</version>
+                <scope>test</scope>
+            </dependency>
+          
+            <!--Test dependency which allows custom JNDI bindings-->
+            <dependency>
+                <groupId>commons-naming</groupId>
+                <artifactId>commons-naming-core</artifactId>
+                <version>${version.commons-naming}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>
