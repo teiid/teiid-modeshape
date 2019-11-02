@@ -135,7 +135,7 @@
         <version.de.flapdoodle.embed.mongo>1.28</version.de.flapdoodle.embed.mongo>
         <version.com.googlecode.json-simple>1.1</version.com.googlecode.json-simple>
         <version.com.drewnoakes.metadata-extractor>2.6.2</version.com.drewnoakes.metadata-extractor>
-        <version.org.apache.lucene>6.4.1</version.org.apache.lucene>
+        <version.org.apache.lucene>8.3.0</version.org.apache.lucene>
         <version.org.jboss.spec.javax.resource.jboss-connector-api_1.7_spec>1.0.0.Final</version.org.jboss.spec.javax.resource.jboss-connector-api_1.7_spec>
         <version.org.jboss.ironjacamar>1.0.13.Final</version.org.jboss.ironjacamar>
         <version.org.apache.pdfbox>2.0.3</version.org.apache.pdfbox>
